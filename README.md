@@ -31,7 +31,7 @@ Dependencies on external namespaces, say `clojure.java.io`, are not shown.
 Below is the namespace dependency graph obtained for
 [Hiccup](https://github.com/weavejester/hiccup).
 
-![Hiccup namespace dependency graph](hilverd.github.com/lein-ns-dep-graph/img/hiccup.png)
+![Hiccup namespace dependency graph](http://hilverd.github.com/lein-ns-dep-graph/img/hiccup.png)
 
 ## License
 
