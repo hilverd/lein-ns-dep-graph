@@ -1,7 +1,7 @@
 # lein-ns-dep-graph
 
-This is a Leiningen plugin to show the namespace dependencies of project sources
-as a graph.
+This is a Leiningen plugin to show the namespace dependencies of Clojure project
+sources as a graph.
 
 ## Acknowledgements
 
