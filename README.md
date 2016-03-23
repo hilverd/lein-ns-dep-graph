@@ -3,6 +3,12 @@
 This is a Leiningen plugin to show the namespace dependencies of Clojure project
 sources as a graph.
 
+## Added Features
+
+For a custom named file add this -name <file-name-without-extension> to the command line run like this:
+
+    lein ns-dep-graph -name my-dep-graph
+
 ## Acknowledgements
 
 The plugin itself is tiny, all the hard work is done by
