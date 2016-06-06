@@ -1,11 +1,14 @@
 (ns leiningen.ns-dep-graph
   (:require [clojure.java.io :as io]
             [clojure.set :as set]
+            [clojure.edn :as edn]
             [clojure.tools.namespace.file :as ns-file]
             [clojure.tools.namespace.track :as ns-track]
             [clojure.tools.namespace.find :as ns-find]
+            [clojure.tools.namespace.parse :as parse]
             [clojure.tools.namespace.dependency :as ns-dep]
-            [rhizome.viz :as viz]))
+            [rhizome.viz :as viz])
+  (:import [java.io PushbackReader]))
 
 (defn- add-image-extension [name]
   (str name ".png"))
@@ -16,7 +19,8 @@
                           options)))
 
 (defn- build-arguments [args]
-  (let [options {"-name" "ns-dep-graph"}
+  (let [options {"-name"     "ns-dep-graph"
+                 "-platform" ":clj"}
         hashed-args (hash-user-arguments args options)
         valid-options (remove nil? (map #(find hashed-args (first %)) options))]
     (merge options (into {} (filter (comp some? val) valid-options)))))
@@ -26,8 +30,12 @@
   [project & args]
   (let [built-args (build-arguments args)
         file-name (get built-args "-name")
+        platform (case (edn/read-string (get built-args "-platform"))
+                   :clj ns-find/clj
+                   :cljs ns-find/cljs
+                   ns-find/clj)
         source-files (apply set/union
-                            (map (comp ns-find/find-clojure-sources-in-dir
+                            (map (comp #(ns-find/find-sources-in-dir % platform)
                                        io/file)
                                  (project :source-paths)))
         tracker (ns-file/add-files {} source-files)

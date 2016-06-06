@@ -32,6 +32,12 @@ from a Clojure project directory. This outputs a file `ns-dep-graph.png` showing
 the internal namespace dependencies of the project's `.clj` sources.
 Dependencies on external namespaces, say `clojure.java.io`, are not shown.
 
+You can also pass an optional platform argument to generate a graph for ClojureScript
+
+    lein ns-dep-graph :cljs # or
+    lein ns-dep-graph :clj
+
+
 ## Examples
 
 Below is the namespace dependency graph obtained for
