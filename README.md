@@ -1,3 +1,5 @@
+[![Clojars Project](https://img.shields.io/clojars/v/lein-ns-dep-graph.svg)](https://clojars.org/lein-ns-dep-graph)
+
 # lein-ns-dep-graph
 
 This is a Leiningen plugin to show the namespace dependencies of Clojure project
