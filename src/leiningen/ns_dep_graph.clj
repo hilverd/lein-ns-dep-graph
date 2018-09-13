@@ -5,7 +5,6 @@
             [clojure.tools.namespace.file :as ns-file]
             [clojure.tools.namespace.track :as ns-track]
             [clojure.tools.namespace.find :as ns-find]
-            [clojure.tools.namespace.parse :as parse]
             [clojure.tools.namespace.dependency :as ns-dep]
             [rhizome.viz :as viz])
   (:import [java.io PushbackReader]))
@@ -20,7 +19,8 @@
 
 (defn- build-arguments [args]
   (let [options {"-name"     "ns-dep-graph"
-                 "-platform" ":clj"}
+                 "-platform" ":clj"
+                 "-parents"  "[]"}
         hashed-args (hash-user-arguments args options)
         valid-options (remove nil? (map #(find hashed-args (first %)) options))]
     (merge options (into {} (filter (comp some? val) valid-options)))))
@@ -43,7 +43,13 @@
         ns-names (set (map (comp second ns-file/read-file-ns-decl)
                            source-files))
         part-of-project? (partial contains? ns-names)
-        nodes (filter part-of-project? (ns-dep/nodes dep-graph))]
+        ns-parents (set (edn/read-string (get built-args "-parents")))
+        part-of-parents?  #(or (empty? ns-parents)
+                               (contains? ns-parents %)
+                               (boolean (seq (set/intersection ns-parents (ns-dep/transitive-dependents dep-graph %)))))
+        nodes (->> (ns-dep/nodes dep-graph)
+                   (filter part-of-project?)
+                   (filter part-of-parents?))]
       (loop [name file-name
              counter 1]
           (if (.exists (io/file (add-image-extension name)))
