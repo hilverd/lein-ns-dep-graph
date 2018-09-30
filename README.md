@@ -36,8 +36,13 @@ Dependencies on external namespaces, say `clojure.java.io`, are not shown.
 
 You can also pass an optional platform argument to generate a graph for ClojureScript
 
-    lein ns-dep-graph :cljs # or
-    lein ns-dep-graph :clj
+    lein ns-dep-graph -platform :cljs # or
+    lein ns-dep-graph -platform :clj
+
+You can also pass an option parents argument, to generate a graph showing only the
+nodes that have (one of) those namespaces as their transitive parent:
+
+    lein ns-dep-graph -parents [my-app.module.b.core]
 
 
 ## Examples
