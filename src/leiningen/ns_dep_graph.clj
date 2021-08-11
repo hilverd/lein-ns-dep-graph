@@ -20,7 +20,8 @@
 (defn- build-arguments [args]
   (let [options {"-name"     "ns-dep-graph"
                  "-platform" ":clj"
-                 "-parents"  "[]"}
+                 "-parents"  "[]"
+                 "-format" "clojure.core/identity"}
         hashed-args (hash-user-arguments args options)
         valid-options (remove nil? (map #(find hashed-args (first %)) options))]
     (merge options (into {} (filter (comp some? val) valid-options)))))
@@ -34,6 +35,7 @@
                    :clj ns-find/clj
                    :cljs ns-find/cljs
                    ns-find/clj)
+        format-fn (eval (read-string (get built-args "-format")))
         source-files (apply set/union
                             (map (comp #(ns-find/find-sources-in-dir % platform)
                                        io/file)
@@ -57,7 +59,7 @@
               (viz/save-graph
                nodes
                #(filter part-of-project? (ns-dep/immediate-dependencies dep-graph %))
-               :node->descriptor (fn [x] {:label x})
+               :node->descriptor (fn [x] {:label (format-fn x)})
                :options {:dpi 72}
                :filename (add-image-extension name))))))
 
