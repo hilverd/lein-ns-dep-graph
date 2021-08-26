@@ -24,9 +24,9 @@ You will need to have [Graphviz](http://www.graphviz.org/) installed. Run `dot
 
 ## Installation and Usage
 
-Put `[lein-ns-dep-graph "0.2.0-SNAPSHOT"]` into the `:plugins` vector of your
+Put `[lein-ns-dep-graph "0.3.0-SNAPSHOT"]` into the `:plugins` vector of your
 `:user` profile, or if you are on Leiningen 1.x do `lein plugin install
-lein-ns-dep-graph 0.2.0-SNAPSHOT`. Then run
+lein-ns-dep-graph 0.3.0-SNAPSHOT`. Then run
 
     lein ns-dep-graph
 
@@ -54,6 +54,6 @@ Below is the namespace dependency graph obtained for
 
 ## License
 
-Copyright © 2013 Hilverd Reker.
+Copyright © 2021 Hilverd Reker.
 
 Distributed under the Eclipse Public License, the same as Clojure.
