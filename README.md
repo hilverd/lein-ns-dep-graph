@@ -5,12 +5,6 @@
 This is a Leiningen plugin to show the namespace dependencies of Clojure project
 sources as a graph.
 
-## Added Features
-
-For a custom named file add this -name <file-name-without-extension> to the command line run like this:
-
-    lein ns-dep-graph -name my-dep-graph
-
 ## Acknowledgements
 
 The plugin itself is tiny, all the hard work is done by
@@ -28,22 +22,41 @@ Put `[lein-ns-dep-graph "0.2.0-SNAPSHOT"]` into the `:plugins` vector of your
 `:user` profile, or if you are on Leiningen 1.x do `lein plugin install
 lein-ns-dep-graph 0.2.0-SNAPSHOT`. Then run
 
-    lein ns-dep-graph
+```sh
+lein ns-dep-graph
+```
 
 from a Clojure project directory. This outputs a file `ns-dep-graph.png` showing
 the internal namespace dependencies of the project's `.clj` sources.
 Dependencies on external namespaces, say `clojure.java.io`, are not shown.
 
-You can also pass an optional platform argument to generate a graph for ClojureScript
+### Command-Line Options
+#### `-platform`
+Specify `:cljs` as the platform argument to generate a graph for ClojureScript:
 
-    lein ns-dep-graph -platform :cljs # or
-    lein ns-dep-graph -platform :clj
+```sh
+lein ns-dep-graph -platform :cljs # or
+lein ns-dep-graph -platform :clj # (default)
+```
 
-You can also pass an option parents argument, to generate a graph showing only the
-nodes that have (one of) those namespaces as their transitive parent:
+#### `-parents`
+Specify `-parents` to generate a graph showing only the nodes that have (one of) 
+those namespaces as their transitive parent:
 
-    lein ns-dep-graph -parents [my-app.module.b.core]
+```sh
+lein ns-dep-graph -parents [my-app.module.b.core]
+```
 
+#### `-name`
+Output to the file `NAME.png` instead of `ns-dep-graph.png`.
+
+#### `-format`
+A clojure form representing a unary function that will be applied to each namespace label. 
+For example:
+```sh
+; Remove project prefix from dep labels
+lein ns-dep-graph -format '(fn [label] (.replace label "com.example-project." ""))'
+```
 
 ## Examples
 
