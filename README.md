@@ -18,9 +18,9 @@ You will need to have [Graphviz](http://www.graphviz.org/) installed. Run `dot
 
 ## Installation and Usage
 
-Put `[lein-ns-dep-graph "0.4.0"]` into the `:plugins` vector of your
+Put `[lein-ns-dep-graph "0.4.0-SNAPSHOT"]` into the `:plugins` vector of your
 `:user` profile, or if you are on Leiningen 1.x do `lein plugin install
-lein-ns-dep-graph 0.4.0`. Then run
+lein-ns-dep-graph 0.4.0-SNAPSHOT`. Then run
 
 ```sh
 lein ns-dep-graph
