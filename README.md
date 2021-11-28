@@ -18,9 +18,9 @@ You will need to have [Graphviz](http://www.graphviz.org/) installed. Run `dot
 
 ## Installation and Usage
 
-Put `[lein-ns-dep-graph "0.3.0-SNAPSHOT"]` into the `:plugins` vector of your
+Put `[lein-ns-dep-graph "0.4.0"]` into the `:plugins` vector of your
 `:user` profile, or if you are on Leiningen 1.x do `lein plugin install
-lein-ns-dep-graph 0.3.0-SNAPSHOT`. Then run
+lein-ns-dep-graph 0.4.0`. Then run
 
 ```sh
 lein ns-dep-graph
@@ -40,7 +40,7 @@ lein ns-dep-graph -platform :clj # (default)
 ```
 
 #### `-parents`
-Specify `-parents` to generate a graph showing only the nodes that have (one of) 
+Specify `-parents` to generate a graph showing only the nodes that have (one of)
 those namespaces as their transitive parent:
 
 ```sh
@@ -51,7 +51,7 @@ lein ns-dep-graph -parents [my-app.module.b.core]
 Output to the file `NAME.png` instead of `ns-dep-graph.png`.
 
 #### `-format`
-A clojure form representing a unary function that will be applied to each namespace label. 
+A clojure form representing a unary function that will be applied to each namespace label.
 For example:
 ```sh
 ; Remove project prefix from dep labels

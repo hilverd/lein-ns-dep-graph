@@ -1,4 +1,4 @@
-(defproject lein-ns-dep-graph "0.3.0-SNAPSHOT"
+(defproject lein-ns-dep-graph "0.4.0"
   :description "Show namespace dependencies of project sources as a graph."
   :url "https://github.com/hilverd/lein-ns-dep-graph"
   :license {:name "Eclipse Public License"
